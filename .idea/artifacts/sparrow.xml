@@ -1,0 +1,35 @@
+<component name="ArtifactManager">
+  <artifact type="war" build-on-make="true" name="sparrow">
+    <output-path>$PROJECT_DIR$/../../AppServers/apache-tomcat-9.0.1/webapps</output-path>
+    <root id="archive" name="sparrow.war">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="sparrow" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="Maven: com.alibaba:druid:1.1.4" />
+          <element id="library" level="project" name="Maven: com.alibaba:fastjson:1.2.39" />
+          <element id="library" level="project" name="Maven: log4j:log4j:1.2.17" />
+          <element id="library" level="project" name="Maven: mysql:mysql-connector-java:5.1.41" />
+          <element id="library" level="project" name="Maven: org.aspectj:aspectjrt:1.8.11" />
+          <element id="library" level="project" name="Maven: org.aspectj:aspectjweaver:1.8.11" />
+          <element id="library" level="project" name="Maven: org.slf4j:slf4j-api:1.7.25" />
+          <element id="library" level="project" name="Maven: org.slf4j:slf4j-log4j12:1.7.25" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-aop:5.0.0.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-beans:5.0.0.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-context-support:5.0.0.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-context:5.0.0.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-core:5.0.0.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-expression:5.0.0.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-jcl:5.0.0.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-jdbc:5.0.0.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-test:5.0.0.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-tx:5.0.0.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-web:5.0.0.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-webmvc:5.0.0.RELEASE" />
+        </element>
+      </element>
+      <element id="javaee-facet-resources" facet="sparrow/web/Web" />
+    </root>
+  </artifact>
+</component>

@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="sparrow:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="sparrow.war">
+      <element id="artifact" artifact-name="sparrow:war exploded" />
+    </root>
+  </artifact>
+</component>

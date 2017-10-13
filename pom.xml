@@ -32,16 +32,52 @@
         <slf4j.version>1.7.25</slf4j.version>
         <!-- mybatis -->
         <mybatis.version>3.4.5</mybatis.version>
+        <!-- mybatis集成spring -->
         <mybatis-spring.version>1.3.1</mybatis-spring.version>
         <!-- mybatis 分页插件 pagehelper -->
         <mybatis-pagehelper.version>5.1.2</mybatis-pagehelper.version>
+        <!-- mybatis 通用Mapper -->
+        <tk.mybatis.mapper.version>3.4.2</tk.mybatis.mapper.version>
+        <!-- MyBatis Generator -->
         <!-- mybatis 代码生成工具 -->
         <mybatis-generator.version>1.3.5</mybatis-generator.version>
+        <!-- 生产的资源放在JAVA工程目录配置 -->
+        <targetJavaProject>${basedir}/src/main/java</targetJavaProject>
+        <!-- 生产的资源放在JAVA资源目录配置 -->
+        <targetResourcesProject>${basedir}/src/main/resources</targetResourcesProject>
+        <!-- 生产的JAVA接口路径 -->
+        <targetMapperPackage>com.sonymm.sparrow.mapper</targetMapperPackage>
+        <!-- 生产的实体类路径 -->
+        <targetModelPackage>com.sonymm.sparrow.model</targetModelPackage>
+        <!-- XML生成路径 -->
+        <targetXMLPackage>mapper</targetXMLPackage>
     </properties>
 
     <build>
         <finalName>sparrow</finalName>
         <plugins>
+            <plugin>
+                <groupId>org.mybatis.generator</groupId>
+                <artifactId>mybatis-generator-maven-plugin</artifactId>
+                <version>${mybatis-generator.version}</version>
+                <configuration>
+                    <configurationFile>${basedir}/src/main/resources/mybatis/mybatis-generator-config.xml</configurationFile>
+                    <overwrite>true</overwrite>
+                    <verbose>true</verbose>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>mysql</groupId>
+                        <artifactId>mysql-connector-java</artifactId>
+                        <version>${mysql-connect-java.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>tk.mybatis</groupId>
+                        <artifactId>mapper</artifactId>
+                        <version>${tk.mybatis.mapper.version}</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
@@ -145,20 +181,29 @@
             <artifactId>mybatis</artifactId>
             <version>${mybatis.version}</version>
         </dependency>
+        <!-- mybatis集成spring -->
         <dependency>
             <groupId>org.mybatis</groupId>
             <artifactId>mybatis-spring</artifactId>
             <version>${mybatis-spring.version}</version>
         </dependency>
+        <!-- mybatis 分页插件 pagehelper -->
         <dependency>
             <groupId>com.github.pagehelper</groupId>
             <artifactId>pagehelper</artifactId>
             <version>${mybatis-pagehelper.version}</version>
         </dependency>
+        <!-- mybatis 代码生成工具 -->
         <dependency>
             <groupId>org.mybatis.generator</groupId>
             <artifactId>mybatis-generator-core</artifactId>
             <version>${mybatis-generator.version}</version>
+        </dependency>
+        <!-- mybatis 通用Mapper -->
+        <dependency>
+            <groupId>tk.mybatis</groupId>
+            <artifactId>mapper</artifactId>
+            <version>${tk.mybatis.mapper.version}</version>
         </dependency>
     </dependencies>
 </project>
