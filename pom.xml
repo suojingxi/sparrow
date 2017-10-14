@@ -51,6 +51,8 @@
         <targetModelPackage>com.sonymm.sparrow.model</targetModelPackage>
         <!-- XML生成路径 -->
         <targetXMLPackage>mapper</targetXMLPackage>
+        <!-- 工具类 -->
+        <commons-collections.version>3.2.2</commons-collections.version>
     </properties>
 
     <build>
@@ -204,6 +206,12 @@
             <groupId>tk.mybatis</groupId>
             <artifactId>mapper</artifactId>
             <version>${tk.mybatis.mapper.version}</version>
+        </dependency>
+        <!-- 工具类 -->
+        <dependency>
+            <groupId>commons-collections</groupId>
+            <artifactId>commons-collections</artifactId>
+            <version>${commons-collections.version}</version>
         </dependency>
     </dependencies>
 </project>
