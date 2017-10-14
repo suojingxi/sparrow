@@ -17,3 +17,4 @@ feature/v1.2继续集成
 MyBatis	            ORM框架
 MyBatis Generator	代码生成
 PageHelper	        MyBatis物理分页插件
+tk.mybatis.mapper   MyBatis通用Mapper
