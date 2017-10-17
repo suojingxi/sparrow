@@ -1,6 +1,6 @@
--- 新建数据库`sparrow`
--- 字符集：utf8
--- 排序规则：utf8_general_ci
+-- Sparrow Center 数据表，用户存放普通用户的数据表
+-- 用户表：存储Sparrow Center注册者的用户数据
+-- 该普通用户是Sparrow Center中的一名普通使用人员，也可以自己成为一名管理人员，只需要通知管理员，让管理员将自己注册到UPMS中心。
 SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------
@@ -8,7 +8,9 @@ SET FOREIGN_KEY_CHECKS=0;
 -- ----------------------------
 DROP TABLE IF EXISTS `center_user`;
 CREATE TABLE `center_user` (
-  `id` INT(11) NOT NULL AUTO_INCREMENT COMMENT '主键-用户编码',
+  `id` INT(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `code` VARCHAR(32) DEFAULT NULL COMMENT '用户编码（默认为id值）)',
+  `username` VARCHAR(32) NOT NULL COMMENT '账户名称',
   `password` VARCHAR(32) NOT NULL COMMENT '密码（MD5（密码+salt））',
   `salt` VARCHAR(32) NOT NULL COMMENT '盐值',
   `nickname` VARCHAR(50) DEFAULT NULL COMMENT '昵称',
@@ -19,7 +21,7 @@ CREATE TABLE `center_user` (
   `id_card_no` VARCHAR(64) DEFAULT NULL COMMENT '身份证号',
   `birthday` TIMESTAMP DEFAULT NULL COMMENT '生日',
   `state` INT(11) DEFAULT 0 COMMENT '状态（0.使用中；1.锁定中；2.已删除）',
-  `create_id` INT(11) DEFAULT 0 COMMENT '创建者ID',
+  `create_user_code` VARCHAR(32) DEFAULT '' COMMENT '创建者编码',
   `create_ip` VARCHAR(64) DEFAULT 'IP: 0.0.0.0' COMMENT '注册IP地址',
   `create_time` TIMESTAMP DEFAULT NULL COMMENT '用户注册时间',
   `last_login_time` DATETIME DEFAULT NULL COMMENT '最后登录时间',
@@ -41,13 +43,14 @@ ALTER TABLE center_user AUTO_INCREMENT=666;
 -- ----------------------------
 DROP TABLE IF EXISTS `center_user_details`;
 CREATE TABLE `center_user_details` (
-  `user_id` INT(11) NOT NULL COMMENT '主键-外键-用户编码',
+  `user_code` INT(11) NOT NULL COMMENT '主键-外键-用户编码',
   `mobile` VARCHAR(32) DEFAULT NULL COMMENT '手机号',
   `email` VARCHAR(200) DEFAULT NULL COMMENT '邮箱',
   `signature` VARCHAR(255) DEFAULT NULL COMMENT '个性签名',
   `integral` INT(11) NOT NULL DEFAULT 0 COMMENT '积分',
   `homepage` VARCHAR(200) DEFAULT NULL COMMENT '用户的主页',
   `login_count` int(11) NOT NULL DEFAULT 1 COMMENT '登录次数',
+  `last_time`  TIMESTAMP NOT NULL DEFAULT current_timestamp ON UPDATE current_timestamp COMMENT '修改时间',
   PRIMARY KEY (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户详情表';
 
@@ -64,7 +67,7 @@ CREATE TABLE `center_user_details` (
 DROP TABLE IF EXISTS `center_user_log`;
 CREATE TABLE `center_user_log` (
   `id` INT(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
-  `operation_id` INT(11)  DEFAULT NULL COMMENT '操作人-外键',
+  `operation_code` VARCHAR(32)  DEFAULT NULL COMMENT '操作人编码-外键',
   `content` VARCHAR(255) NOT NULL DEFAULT '' COMMENT '操作内容',
   `state` INT(10) NOT NULL DEFAULT 0 COMMENT '状态（0.显示；1.隐藏）',
   `operation_ip` VARCHAR(40) DEFAULT NULL COMMENT '操作人IP',
@@ -79,29 +82,6 @@ CREATE TABLE `center_user_log` (
 -- ----------------------------
 -- Records of center_user_log
 -- ----------------------------
-
-
--- ----------------------------
--- Table structure for upms_user
--- ----------------------------
-
-
-
-
--- ----------------------------
--- Records of upms_user
--- ----------------------------
-
-
-
-
-
-
-
-
-
-
-
 
 
 
