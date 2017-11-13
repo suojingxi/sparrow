@@ -86,7 +86,7 @@ DROP TABLE IF EXISTS `upms_organization`;
 CREATE TABLE `upms_organization` (
   `id` INT(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
   `code` VARCHAR(32) DEFAULT NULL COMMENT '组织代码（默认为id值）',
-  `pid` INT(11) NOT NULL COMMENT '父级ID',
+  `pcode` INT(11) NOT NULL COMMENT '父级代码',
   `name` VARCHAR(32) NOT NULL COMMENT '组织名称',
   `status` TINYINT(4) DEFAULT 0 COMMENT '状态（0.关闭 1.启用）',
   `sort` INT(11) DEFAULT 0 COMMENT '排序（同一级别的按照从小到大排序，小的排前面，大的排后面）',
@@ -112,7 +112,7 @@ DROP TABLE IF EXISTS `upms_role`;
 CREATE TABLE `upms_role` (
   `id` INT(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
   `code` VARCHAR(32) DEFAULT NULL COMMENT '角色代码（默认为id值）',
-  `pid` INT(11) NOT NULL COMMENT '父级ID',
+  `pcode` INT(11) NOT NULL COMMENT '父级代码',
   `name` VARCHAR(32) NOT NULL COMMENT '角色名称',
   `title` VARCHAR(32) NOT NULL COMMENT '角色标题',
   `status` TINYINT(4) DEFAULT 0 COMMENT '状态（0.关闭 1.启用）',
@@ -168,7 +168,7 @@ CREATE TABLE `upms_system` (
 DROP TABLE IF EXISTS `upms_permission`;
 CREATE TABLE `upms_permission` (
   `id` INT(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
-  `pid` INT(11) NOT NULL DEFAULT 0 COMMENT '父级ID',
+  `pcode` INT(11) NOT NULL DEFAULT 0 COMMENT '父级编码',
   `system_code` INT(11) NOT NULL COMMENT '所属系统编码',
   `code` VARCHAR(32) DEFAULT NULL COMMENT '权限编码（默认为id值）',
   `name` VARCHAR(32) DEFAULT NULL COMMENT '权限名称',
