@@ -14,7 +14,7 @@
             <!--<property name="mappers" value="tk.mybatis.mapper.common.Mapper"></property>-->
         </plugin>
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://127.0.0.1:3306/sparrow"
+                        connectionURL="jdbc:mysql://127.0.0.1:3306/sparrow_upms"
                         userId="suojx"
                         password="suojx">
         </jdbcConnection>

@@ -1,7 +1,7 @@
 package com.sonymm.sparrow.controller;
 
-import com.sonymm.sparrow.model.SparrowUser;
-import com.sonymm.sparrow.service.SparrowUserService;
+import com.sonymm.sparrow.model.UpmsUser;
+import com.sonymm.sparrow.service.UpmsUserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,15 +21,18 @@ public class UserController {
     private static Logger logger = LoggerFactory.getLogger(UserController.class);
 
     /*@Autowired
-    JdbcTemplate sparrowJdbcTemplate;*/
+    JdbcTemplate sparrowJdbcTemplate;
     @Autowired
-    private SparrowUserService sparrowUserService;
+    private SparrowUserService sparrowUserService;*/
+    @Autowired
+    private UpmsUserService upmsUserService;
 
     @RequestMapping(value="/getUser", method = RequestMethod.GET)
     public ResponseEntity<Object> getUser(){
         /*String sql = "select * from sparrow_user";
-        List<Map<String, Object>> list = sparrowJdbcTemplate.queryForList(sql);*/
-        SparrowUser sparrowUser = sparrowUserService.selectSparrowUserByUserName("admin");
-        return new ResponseEntity<Object>(sparrowUser, new HttpHeaders(), HttpStatus.OK);
+        List<Map<String, Object>> list = sparrowJdbcTemplate.queryForList(sql);
+        SparrowUser sparrowUser = sparrowUserService.selectSparrowUserByUserName("admin");*/
+        UpmsUser upmsUser = upmsUserService.selectByPrimaryKey(1);
+        return new ResponseEntity<Object>(upmsUser, new HttpHeaders(), HttpStatus.OK);
     }
 }
