@@ -14,9 +14,6 @@
 
     <description>Spring Configuration</description>
 
-    <!-- 启用注解 -->
-    <context:annotation-config />
-
     <!-- 加载配置属性文件 -->
     <context:property-placeholder location="classpath:/properties/sparrow.properties"
                                   file-encoding="UTF-8"
@@ -52,6 +49,45 @@
         <property name="logAbandoned" value="${sparrow.druid.logAbandoned}"/>
     </bean>
 
+    <!-- 配置sparrow JdbcTemplate -->
+    <bean id="sparrowJdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <property name="dataSource" ref="sparrowDruidDataSource"/>
+    </bean>
+
+    <!-- mybatis配置 -->
+    <bean id="sparrowSqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!-- 相应数据源 -->
+        <property name="dataSource" ref="sparrowDruidDataSource"/>
+        <!-- 默认是bean首字母小写的映射方式 -->
+        <property name="typeAliasesPackage" value="com.sonymm.sparrow.model"/>
+        <property name="mapperLocations" value="classpath:mapper/*.xml"/>
+        <property name="configLocation" value="classpath:mybatis/mybatis-config.xml"/>
+        <property name="plugins">
+            <array>
+                <bean class="com.github.pagehelper.PageInterceptor">
+                    <property name="properties">
+                        <value>
+                            helperDialect=mysql
+                            reasonable=true
+                            supportMethodsArguments=true
+                            params=count=countSql
+                            autoRuntimeDialect=true
+                        </value>
+                    </property>
+                </bean>
+            </array>
+        </property>
+    </bean>
+
+    <bean id="sparrowMapperScannerConfigurer" class="tk.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.sonymm.sparrow.mapper"/>
+        <property name="markerInterface" value="com.sonymm.sparrow.common.mapper.BaseMapper"/>
+    </bean>
+
+    <bean id="sparrowSqlSession" class="org.mybatis.spring.SqlSessionTemplate" scope="prototype">
+        <constructor-arg index="0" ref="sparrowSqlSessionFactory"/>
+    </bean>
+
     <!-- 1.配置事务管理器 -->
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <!-- 注入DataSource -->
@@ -74,9 +110,4 @@
         <!-- 切面 -->
         <aop:advisor advice-ref="txAdvice" pointcut-ref="pointcut1"/>
     </aop:config>
-
-    <!-- 配置sparrow JdbcTemplate -->
-    <bean id="sparrowJdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
-        <property name="dataSource" ref="sparrowDruidDataSource"/>
-    </bean>
 </beans>
